@@ -1,0 +1,19 @@
+.maincontainer .up{
+    background-color:#25ddc4;
+    padding: 20px;
+    width: 45%;
+}
+
+.up h2{
+        color: white;
+            font-weight: bold;
+}
+
+.up img{
+        width: 20%;
+            margin: 26px 0;
+}
+.maincontainer{
+    display: flex;
+    gap: 20px;
+}
