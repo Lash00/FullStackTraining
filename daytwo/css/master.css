@@ -1,0 +1,17 @@
+.containerPage3 {
+            background-color: #eee;
+            width: 25%;
+            padding: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            -o-transform: translate(-50%,-50%);
+}
+.bodyPage3{
+        background: linear-gradient(139deg, black, #fbe5e500);
+            position: relative;
+}
