@@ -1,3 +1,12 @@
+<?php
+if (array_key_exists('admin', $_GET)) {
+    $name = $_GET['name'];
+    $email = $_GET['email'];
+    header("location:admin.php?name=$name&email=$email");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,6 +51,7 @@
         <div class="row">
             <div class="col">
                 <div class="card p-5">
+                    <h1 class="text-light  text-center fw-font bg-linear p-2 w-50 mx-auto rounded-4 ">Products</h1>
                     <form action="" method="post" class="was-validated " enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-lg-6 col-sm-12 col-md-6">
@@ -64,7 +74,7 @@
                             <div class="col text-center">
                                 <input type="hidden" name="hasSended">
                                 <input type="submit" value="Add Products"
-                                    class="btn bg-linear p-2  mx-auto mt-3 text-light fw-bold border-0"
+                                    class="btn bg-linear p-2  mx-auto mt-3 text-light fw-bold border-0 myShadow"
                                     style="width: 35%;">
                             </div>
                         </div>
@@ -104,7 +114,7 @@
                             ;
 
                             if (count($errors)) {
-                                echo "<div class='alert alert-warning '  type='alert'>
+                                echo "<div class='alert alert-warning w-100'  type='alert'>
     Pleace change this files To fixe this errors :
     <ul class='list group'>";
                                 foreach ($errors as $error) {
@@ -157,15 +167,24 @@
 
                         }
 
-
-
-
-
                         ?>
                     </div>
+                    <div class="text-center mx-auto mt-3 " style="width: 35%;">
+                        <form action="">
+                            <input type="hidden" name="admin">
+                            <input type="hidden" name="name" value=<?php echo $_GET['name'] ?>>
+                            <input type="hidden" name="email" value=<?php echo $_GET['email'] ?>>
+                            <input type="submit" value="Admin Dashboard"
+                                class="btn bg-linear p-x-5 w-100  mx-auto mt-3 text-light fw-bold border-0 myShadow">
+                        </form>
+
+                    </div>
+
                 </div>
+
             </div>
         </div>
+    </div>
     </div>
 </body>
 
