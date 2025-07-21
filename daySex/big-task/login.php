@@ -92,6 +92,9 @@ if ($_SERVER['SERVER_NAME'] != 'localhost') {
                         /*echo "<pre>";
                         print_r($_SESSION['admins']);
                         echo "</pre>";*/
+                        if (!isset($_SESSION['admins'])) {
+                            $_SESSION['admins'] = [];
+                        }
                         if (array_key_exists("hasSend", $_POST)) {
                             $flag = false;
                             $name = '';
