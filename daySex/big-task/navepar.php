@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<?php
+session_start();
+if (isset($_GET["btn"]) && $_GET["btn"] == "logout") {
+    $_SESSION["currentAdmin"] = [];
+    header('location:login.php');
+}
+?>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lash Navbar</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/all.min.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <style>
+        .navbar-custom {
+            background: linear-gradient(to right, #1f1c2c, #928dab);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: white !important;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand i {
+            margin-right: 8px;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin-left: 15px;
+        }
+
+        .nav-link:hover {
+            color: #ffc107 !important;
+        }
+
+        .btn-login {
+            background-color: #ffc107;
+            border: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .btn-login:hover {
+            background-color: #e0a800;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom shadow">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-bolt"></i> Lash
+            </a>
+            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="adminHome.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="galary.php">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="productInfo.php">Products Info </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="addProduct.php">Add Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="loginInfo.php">Login info</a>
+                    </li>
+                </ul>
+                <form class="d-flex" method="get">
+                    <button name="btn" value="logout" class="btn btn-login text-dark btn-light px-3"
+                        type="submit">LogOut</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <script src="../js/bootstrap.bundle.js"></script>
+</body>
+
+</html>
