@@ -1,6 +1,9 @@
 <?php
 require_once("CoursesDB.php");
 include_once("navebar.php");
+if ($_SESSION["currentUser"]['role'] != 1) {
+    header('location:powerNotEnough.php');
+}
 ?>
 
 <!DOCTYPE html>

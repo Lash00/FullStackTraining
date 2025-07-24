@@ -1,6 +1,9 @@
 <?php
 require_once("CoursesDB.php");
 session_start();
+if ($_SESSION["currentUser"]['role'] != 1) {
+    header('location:powerNotEnough.php');
+}
 if (isset($_GET['del'])) {
     deletCourse($con, 'users', $_GET['del']);
 }
@@ -32,53 +35,53 @@ require_once("navebar.php");
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/all.min.css">
     <style>
-    .myShadow {
-        box-shadow: 0px 0px 50px #4d4d4d;
-        border: none
-    }
-
-    .bg-linear {
-        background: linear-gradient(135deg, #ff512f, #dd2476, #1e90ff);
-
-    }
-
-    .anmitions {
-        transition: all 0.5s ease-in-out;
-        animation: move 2s ease-in-out infinite;
-    }
-
-    @keyframes move {
-
-        0%,
-        100% {
-            transform: translateY(-10px);
+        .myShadow {
+            box-shadow: 0px 0px 50px #4d4d4d;
+            border: none
         }
 
-        50% {
-            transform: translateY(10px);
+        .bg-linear {
+            background: linear-gradient(135deg, #ff512f, #dd2476, #1e90ff);
 
         }
 
-    }
+        .anmitions {
+            transition: all 0.5s ease-in-out;
+            animation: move 2s ease-in-out infinite;
+        }
 
-    .custom-table thead {
-        background-color: #343a40;
-        color: white;
-    }
+        @keyframes move {
 
-    .custom-table tbody tr:hover {
-        background-color: #f8f9fa;
-    }
+            0%,
+            100% {
+                transform: translateY(-10px);
+            }
 
-    .status-active {
-        color: green;
-        font-weight: bold;
-    }
+            50% {
+                transform: translateY(10px);
 
-    .status-inactive {
-        color: red;
-        font-weight: bold;
-    }
+            }
+
+        }
+
+        .custom-table thead {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .custom-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .status-active {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-inactive {
+            color: red;
+            font-weight: bold;
+        }
     </style>
 </head>
 
