@@ -19,60 +19,63 @@ if (isset($_GET['del'])) {
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/all.min.css">
     <style>
-        .myShadow {
-            box-shadow: 0px 0px 50px #4d4d4d;
-            border: none
+    .myShadow {
+        box-shadow: 0px 0px 50px #4d4d4d;
+        border: none
+    }
+
+    .bg-linear {
+        background: linear-gradient(135deg, #ff512f, #dd2476, #1e90ff);
+
+    }
+
+    .anmitions {
+        transition: all 0.5s ease-in-out;
+        animation: move 2s ease-in-out infinite;
+    }
+
+    @keyframes move {
+
+        0%,
+        100% {
+            transform: translateY(-10px);
         }
 
-        .bg-linear {
-            background: linear-gradient(135deg, #ff512f, #dd2476, #1e90ff);
+        50% {
+            transform: translateY(10px);
 
         }
 
-        .anmitions {
-            transition: all 0.5s ease-in-out;
-            animation: move 2s ease-in-out infinite;
-        }
+    }
 
-        @keyframes move {
+    .custom-table thead {
+        background-color: #343a40;
+        color: white;
+    }
 
-            0%,
-            100% {
-                transform: translateY(-10px);
-            }
+    .custom-table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
 
-            50% {
-                transform: translateY(10px);
+    .status-active {
+        color: green;
+        font-weight: bold;
+    }
 
-            }
-
-        }
-
-        .custom-table thead {
-            background-color: #343a40;
-            color: white;
-        }
-
-        .custom-table tbody tr:hover {
-            background-color: #f8f9fa;
-        }
-
-        .status-active {
-            color: green;
-            font-weight: bold;
-        }
-
-        .status-inactive {
-            color: red;
-            font-weight: bold;
-        }
+    .status-inactive {
+        color: red;
+        font-weight: bold;
+    }
     </style>
 </head>
 
 <body class="bg-light">
 
     <div class="container py-5">
-        <h2 class="text-center mb-4">Admin Panel</h2>
+        <h2 class="text-center mb-4">
+            <?php echo ($_SESSION["currentUser"]['role'] == 1 ? $_SESSION["currentUser"]['name'] . "  Admin Enrolls Panel " : 'Class Courcess & Degree') ?>
+
+        </h2>
         <div class="table-responsive-md table-responsive-sm">
 
             <table class="table table-striped table-bordered table-striped custom-table text-center shadow">
@@ -84,7 +87,7 @@ if (isset($_GET['del'])) {
                         <th>Course Title</th>
                         <th>Course Degree</th>
                         <th>Course desc</th>
-                        <th>Actions </th>
+                        <?php echo ($_SESSION["currentUser"]['role'] == 1 ? "<th>Actions </th>" : ''); ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,8 +108,10 @@ if (isset($_GET['del'])) {
     JOIN coursData ON coursData.id = enrolles.course_id
 "
                     );
+                    $numOfRows = $_SESSION["currentUser"]['role'] == 1 ? 7 : 6;
+
                     if (mysqli_num_rows($enrollData) == 0) {
-                        echo "<tr><td colspan='6' class='text-center text-danger fs-3'>No one Enrolled yet </td></tr>";
+                        echo "<tr><td colspan='$numOfRows' class='text-center text-danger fs-3'>No one Enrolled yet </td></tr>";
 
                     }
                     while ($row = mysqli_fetch_assoc($enrollData)) {
@@ -116,9 +121,16 @@ if (isset($_GET['del'])) {
                                 continue;
                             echo "<td>" . $value . "</td>";
                         }
-                        echo '<td>   <form action="" method="get">
-                                             <button type="submit" class="btn btn-danger w-100 p-2 text-light mt-1 " name="del" value="' . $row['id'] . '">Sign Out</button>
-                                        </form></td></tr>';
+
+
+                        if ($_SESSION["currentUser"]['role'] == 1) {
+                            echo '<td>   <form action="" method="get">
+                                             <button type="submit" class="btn btn-danger w-100 px-2 text-light" name="del" value="' . $row['id'] . '">Sign Out</button>
+                                        </form></td>';
+                        }
+
+
+                        echo '</tr>';
                         // echo "";
                     }
 
@@ -129,6 +141,8 @@ if (isset($_GET['del'])) {
 
     </div>
     <script src="./js/bootstrap.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 

@@ -28,6 +28,20 @@ mysqli_query($con, "CREATE TABLE IF NOT EXISTS enrolles(
     FOREIGN KEY (course_id) REFERENCES coursData(id) ON DELETE CASCADE
 );
 ");
+
+mysqli_query($con, "CREATE TABLE IF NOT EXISTS users (
+id int auto_increment primary key,
+name varchar(50) not null,
+email varchar(200) not null,
+password varchar(100) not null,
+role int default 0,
+image text not null
+) ");
+
+
+
+
+
 // mysqli_query($con, "DROP TABLE enrolles");
 
 
@@ -77,6 +91,35 @@ function addNewEnroll($db, $stdId, $corID, $deg)
 {
     $query = "INSERT INTO enrolles VALUES('',$stdId,$corID,'$deg')";
     mysqli_query($db, $query);
+}
+
+// function getAllData($con, $tableName)
+// {
+//     return mysqli_query($con, "SELECT * FROM $tableName");
+// }
+function getSpacificData($con, $tableName, $where)
+{
+    return mysqli_query($con, "SELECT * FROM $tableName WHERE $where ");
+}
+function addNewUser($con, $name, $email, $password, $image, $role = 0)
+{
+    $query = "INSERT INTO users VALUES ('','$name','$email','$password','$role','$image')";
+    mysqli_query($con, $query);
+}
+function addNewAdmin($con, $name, $email, $password, $image)
+{
+    $query = "INSERT INTO users VALUES ('','$name','$email','$password','1','$image')";
+    mysqli_query($con, $query);
+}
+function addNewProducts($con, $adminEmail, $name, $desc, $image)
+{
+    $query = "INSERT INTO products VALUES ('','$adminEmail','$name','$desc','$image')";
+    mysqli_query($con, $query);
+}
+
+function deletRow($con, $tableName, $where)
+{
+    mysqli_query($con, "DELETE FROM $tableName WHERE $where");
 }
 
 ?>

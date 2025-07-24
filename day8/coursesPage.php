@@ -81,7 +81,12 @@ if (isset($_POST['added'])) {
 <body class="bg-light">
 
     <div class="container py-5">
-        <h2 class="text-center mb-4">Admin Panel</h2>
+        <h2 class="text-center mb-4">
+
+            <?php echo ($_SESSION["currentUser"]['role'] == 1 ? $_SESSION["currentUser"]['name']. "  Admin Cources Panel : " : 'Aveliable Cources') ?>
+
+
+        </h2>
 
         <div class="table-responsive-md table-responsive-sm">
             <table class="table table-striped table-bordered table-striped custom-table text-center shadow">
@@ -91,7 +96,7 @@ if (isset($_POST['added'])) {
                         <th>Description</th>
                         <th>Hours</th>
                         <th>Price</th>
-                        <th>Actions </th>
+                        <?php echo($_SESSION["currentUser"]['role'] == 1 ? "<th>Actions </th>":'');?>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,8 +104,9 @@ if (isset($_POST['added'])) {
                     <?php
 
                 $courseData = getAllData($con, "coursData");
+                $numOfRows=$_SESSION["currentUser"]['role']==1?5:4;
                 if (mysqli_num_rows($courseData) == 0) {
-                    echo "<tr><td colspan='5' class='text-center text-danger fs-3'>There is no cources Yet</td></tr>";
+                    echo "<tr><td colspan='$numOfRows' class='text-center text-danger fs-3'>There is no cources Yet</td></tr>";
                 } else {
                     while ($row = mysqli_fetch_assoc($courseData)) {
                         echo "<tr>";
@@ -109,7 +115,8 @@ if (isset($_POST['added'])) {
                         echo "<td>" . $row['description'] . "</td>";
                         echo "<td>" . $row['hours'] . "</td>";
                         echo "<td>" . $row['price'] . "</td>";
-                        echo ' 
+                      if($_SESSION["currentUser"]['role']==1){
+                                echo ' 
                     <td>   
                         <div class="row">
                                 <div class="col">         
@@ -125,6 +132,7 @@ if (isset($_POST['added'])) {
                         </div>
    
                     </td>';
+                      }
                         echo "</tr>";
                     }
                 }
