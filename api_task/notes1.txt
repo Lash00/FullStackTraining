@@ -1,0 +1,22 @@
+when use the post >> its apper in the console only and not apper in the api login page .php
+
+❓ ليه بيظهر null؟
+لأنك لما تفتح صفحة PHP في المتصفح مباشرة، أنت ما بعتش أي JSON data، وده السطر في الكود المسؤول عن القراءة:
+
+php
+Copy
+Edit
+$data = json_decode(file_get_contents("php://input"), true);
+ده بيقول للـ PHP:
+
+"اقرأ الـ body اللي اتبعت (لو اتبعت فعلاً) كـ JSON، وحوله إلى Array"
+
+لكن لما تفتح الصفحة من المتصفح:
+
+مافيش POST
+
+مافيش JSON
+
+فـ file_get_contents("php://input") بيرجع فاضي
+
+وبالتالي json_decode(...) بيرجع null

@@ -1,0 +1,63 @@
+/* h1{
+    margin: 0;
+    padding: 0;
+} */
+body{
+    min-height:100vh ;
+}
+.main-bg{
+    background-image: url('../images/mainBG.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.myShadow{
+       
+            box-shadow: 0px 0px 58px black;
+}
+
+.logBtnColor{
+    background-color: #002a57 !important;
+}
+.text-secColor{
+    color: #002a57;
+}
+
+.shape{
+        border-top-left-radius: 25%;
+            border-bottom-right-radius: 10%;
+}
+
+.animation{
+    transition: all 2s ease-in-out;
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+    -ms-transition: all 2s ease-in-out;
+    -o-transition: all 2s ease-in-out;
+    animation: upDown 1s infinite ease-in-out;
+    -webkit-animation: upDown 2s infinite ease-in-out;
+}
+
+@keyframes upDown {
+    0%,100%{
+        transform: translateY(10px);
+        -webkit-transform: translateY(10px);
+        -moz-transform: translateY(10px);
+        -ms-transform: translateY(10px);
+        -o-transform: translateY(10px);
+}
+50%{
+    transform: translateY(-10px);
+    -webkit-transform: translateY(-10px);
+    -moz-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    -o-transform: translateY(-10px);
+}
+    
+}
+

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page </title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/master.css">
+    <link rel="stylesheet" href="../css/all.min.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+</head>
+
+<body class="main-bg center ">
+    <div class="container ">
+        <div class="row">
+            <div class="col">
+                <div class="card shape w-50 p-5 mx-auto myShadow" style=" background-color: #12988d;">
+                    <form action="" method="post" class="was-validated p-5 bg-light shape " id="loginForm">
+                        <h3 class="text-success text-center mx-auto mb-2 p-0">Welcome Back</h3>
+                        <div class="error"> </div>
+                        <section class="mt-3">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-user p-2 text-success"></i>
+                                </span>
+                                <input type="email" id="email" class="form-control is is-valid"
+                                    placeholder="Enter your Email" name="email" required>
+                                <div class="invalid-feedback">
+                                    Please enter ur Email
+                                </div>
+                            </div>
+                        </section>
+                        <section class="mt-3">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <button type="button" class="btnEyes " style="border: none; background: none;"> <i
+                                            class="fas fa-eye p-1 text-success"></i></button>
+                                </span>
+                                <input type="password" id="pass" class="form-control is is-valid"
+                                    placeholder="Enter your Passord" name="pass" required>
+                                <div class="invalid-feedback">
+                                    Please enter ur password
+                                </div>
+                            </div>
+                        </section>
+                        <input type="hidden" name="hasSend">
+                        <input type="submit" value="LogIn" id="login"
+                            class="btn shape logBtnColor text-light p-2 w-100 mt-2">
+                        <a href="http://localhost/NTI/api_task/Auth/SingUp.html"><button type="button"
+                                class="btn shape logBtnColor p-2 w-100 mt-2 text-light">SingUp</button></a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let eyeBtn = document.querySelector(".btnEyes");
+        let pass = document.getElementById('pass');
+        let flag = 0;
+        eyeBtn.onclick = () => {
+            if (flag) {
+                pass.setAttribute('type', 'text');
+                flag = !flag;
+            } else {
+                pass.setAttribute('type', 'password');
+                flag = !flag;
+            }
+        }
+        // let btn=document.getElementById('login');
+        const form = document.getElementById("loginForm");
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            let email = document.getElementById('email');
+            let password = document.getElementById('pass');
+
+            fetch("./auth-server/login.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    email: email.value,
+                    password: password.value
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        localStorage.setItem("user", JSON.stringify({
+                            name: data.name,
+                            email: data.email,
+                            image: data.image,
+                            role: data.role,
+                            id:data.id
+                        }));
+                        localStorage.setItem("token", Math.random());
+                        window.location.href = '../home.php';
+                    }
+                    else {
+                        let errorDiv = document.querySelector('.error');
+                        let error = `<div class='alert alert-danger ' type='alert'>${data.message}</div>`;
+                        errorDiv.innerHTML = '';
+                        errorDiv.innerHTML = error;
+                    }
+                    console.log(data.message);
+                })
+        });
+    </script>
+</body>
+
+</html>
