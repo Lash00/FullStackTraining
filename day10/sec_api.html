@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+<body>
+    <div class="container">
+
+    </div>
+
+    <script>
+        fetch("http://localhost/NTI/day10/api.php").then(Response=>
+           Response.json()
+
+       
+)
+        .then(data => {
+                if(data.connection === "true"){
+                    console.log(data);
+data.data.forEach(element => {
+                        document.querySelector('.container').innerHTML += `
+<ul class="list-group mt-2  w-50 bg-danger  p-5 mx-auto  ">
+    <h3 class='text-light'>User number :${element.id}</h3>
+    <li class="list-group-item mt-1 ">User Name : ${element.Name}</li>
+    <li class="list-group-item  mt-1">Gender: ${element.Gender}</li>
+</ul>  
+           `;
+});
+                }
+                else{
+document.querySelector(".container").innerHTML=`<div class="alert alert-danger">${data.data.message}</div>`;
+                }
+            })
+    </script>
+    
+
+</body>
+</html>
