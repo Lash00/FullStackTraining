@@ -1,0 +1,14 @@
+{
+    "name": "lashin/courses-api",
+    "description": "my frist api",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Lashin\\CoursesApi\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "dompdf/dompdf": "^3.1"
+    }
+}
